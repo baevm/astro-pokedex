@@ -1,0 +1,16 @@
+---
+import Search from '../components/Search'
+import Layout from '../layouts/Layout.astro'
+import { Image } from '@astrojs/image/components'
+
+// const data = await fetch('https://pokeapi.co/api/v2/pokemon/ditto').then((res) => res.json());
+---
+
+<Layout title={'Pokedex'}>
+  <div class='w-screen h-screen flex items-center justify-center bg-[#414141]'>
+    <div class='w-1/2 flex flex-col items-center'>
+      <img class="absolute top-64" src='/images/pokemon_logo.svg' width='200' height='200' alt='pokemon logo' />
+      <Search />
+    </div>
+  </div>
+</Layout>

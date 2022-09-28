@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'SourceCode';
+  src: url('/fonts/SourceCodePro-Light.ttf');
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SourceCode';
+  src: url('/fonts/SourceCodePro-Regular.ttf');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SourceCode';
+  src: url('/fonts/SourceCodePro-Medium.ttf');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SourceCode';
+  src: url('/fonts/SourceCodePro-ExtraBold.ttf');
+  font-weight: 800;
+  font-display: swap;
+}
