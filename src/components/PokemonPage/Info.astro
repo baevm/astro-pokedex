@@ -1,0 +1,26 @@
+---
+export interface Props {
+  name: string
+  height: number
+  weight: number
+  abilities: Array<string>
+  image: string
+}
+
+const { name, height, weight, abilities, image } = Astro.props
+---
+
+<section class='absolute w-full flex flex-col lg:flex-row items-center justify-between'>
+  <div class='w-64'>
+    <h1 class='text-[4em] font-extrabold'>{name}</h1>
+    <div class='w-full'>
+      <div class='w-full flex justify-between'><b>Height</b> {height} DM</div>
+      <div class='w-full flex justify-between'><b>Weight</b> {weight} HG</div>
+      <div class='w-full flex justify-between'>
+        <b>Abilities</b>
+        <span class='text-end'>{abilities.map((ab: any) => <div>{ab.ability.name}</div>)}</span>
+      </div>
+    </div>
+  </div>
+  {(<img width={'40%'} height={'40%'} src={image} alt={name} />)}
+</section>

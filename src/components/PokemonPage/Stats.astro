@@ -1,0 +1,36 @@
+---
+export interface Props {
+  stats: [
+    {
+      base_stat: number
+      effort: number
+      stat: {
+        name: string
+        url: string
+      }
+    }
+  ]
+}
+
+const { stats } = Astro.props
+---
+
+<section class='w-full absolute bottom-[10%] flex flex-col lg:flex-row items-center justify-around'>
+  <h2 class='text-[2em] font-extrabold'>STATS</h2>
+  <div class='w-2/3'>
+    {
+      stats.map((stat: typeof stats[0]) => {
+        const percent = (stat.base_stat / 255) * 100
+        return (
+          <div class='mb-2 flex justify-between'>
+            <div class='flex w-full'>
+              <b class='min-w-[150px]'>{stat.stat.name}</b>
+              <div style={`width: ${percent}%; max-width: 75%`} class={`rounded-lg bg-white`} />
+            </div>
+            <span class='text-end ml-2'>{stat.base_stat}</span>
+          </div>
+        )
+      })
+    }
+  </div>
+</section>

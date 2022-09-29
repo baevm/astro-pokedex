@@ -29,3 +29,21 @@
   font-weight: 800;
   font-display: swap;
 }
+
+:root {
+  --primary-text-color: #7f7f7f;
+  --second-text-color: #bab9b9;
+  --bg-color: #414141;
+  --second-bg-color: #515151;
+  --border-color: #7f7f7f;
+  --active-border-color: #a1a1a1;
+}
+
+body.light {
+  --primary-text-color: #1f1f1f;
+  --second-text-color: #636262;
+  --bg-color: #3d7dca;
+  --second-bg-color: #FFCB05;
+  --border-color: #3B5BA7;
+  --active-border-color: #003a70;
+}

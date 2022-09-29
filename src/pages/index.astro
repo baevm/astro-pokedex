@@ -1,16 +1,22 @@
 ---
-import Search from '../components/Search'
-import Layout from '../layouts/Layout.astro'
 import { Image } from '@astrojs/image/components'
-
-// const data = await fetch('https://pokeapi.co/api/v2/pokemon/ditto').then((res) => res.json());
+import { BiSearch } from 'react-icons/bi'
+import ThemeButton from '../components/common/ThemeButton'
+import Layout from '../layouts/Layout.astro'
+import pokeballImage from '../images/pokeball.png'
+import pokemonLogo from '../images/pokemon_logo.png'
+import Search from '../components/SearchPage/Search.astro'
 ---
 
 <Layout title={'Pokedex'}>
-  <div class='w-screen h-screen flex items-center justify-center bg-[#414141]'>
-    <div class='w-1/2 flex flex-col items-center'>
-      <img class="absolute top-64" src='/images/pokemon_logo.svg' width='200' height='200' alt='pokemon logo' />
+  <div class='w-screen h-screen flex px-8 flex-col items-center justify-center bg-bg-color'>
+    <div class='absolute top-4 right-4'>
+      <ThemeButton client:load />
+    </div>
+    <div class='max-w-3xl w-full flex flex-col items-center'>
+      <Image class='absolute top-64' src={pokemonLogo} width='320' height='118' alt='pokemon logo' quality={100} />
       <Search />
     </div>
   </div>
+
 </Layout>

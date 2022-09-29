@@ -7,7 +7,16 @@ module.exports = {
         SourceCode: ['SourceCode', 'sans-serif'],
         PPm: ['PPm'],
       },
+      colors: {
+        'primary-text-color': 'var(--primary-text-color)',
+        'second-text-color': 'var(--second-text-color)',
+        'bg-color': 'var(--bg-color)',
+        'second-bg-color': 'var(--second-bg-color)',
+        'border-color': 'var(--border-color)',
+        'active-border-color': 'var(--active-border-color)',
+      },
     },
   },
+  darkMode: 'class',
   plugins: [],
 }

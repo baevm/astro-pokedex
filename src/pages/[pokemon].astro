@@ -1,0 +1,45 @@
+---
+import Info from '../components/PokemonPage/Info.astro'
+import Stats from '../components/PokemonPage/Stats.astro'
+import Search from '../components/SearchPage/Search.astro'
+import Layout from '../layouts/Layout.astro'
+import formatId from '../lib/formatId'
+import getBGColor from '../lib/getBGColor'
+import { getPokemon } from '../services/getPokemon'
+
+const { pokemon } = Astro.params
+
+const { pokemon_data, status } = await getPokemon(pokemon)
+/* const pokecolor = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`).then((res) => res.json()) */
+
+if (status === 404) {
+  return Astro.redirect('/404')
+}
+
+const bgcolor = getBGColor(pokemon_data?.type)
+const id = formatId(pokemon_data?.id)
+---
+
+<Layout title={pokemon as string}>
+  <div
+    style={`background-color: ${bgcolor}`}
+    class={`min-w-screen min-h-screen flex justify-center bg-${bgcolor}] text-white`}>
+    <div class='max-w-[1200px] relative w-full py-2'>
+      <div class='w-full h-12'><Search /></div>
+
+      <div class='left-1/2 right-1/2 top-[20%] absolute flex items-center justify-center text-[25vmin] font-extrabold opacity-20'>
+        {id}
+      </div>
+
+      <Info
+        name={pokemon_data?.name}
+        height={pokemon_data?.height}
+        weight={pokemon_data?.weight}
+        abilities={pokemon_data?.abilities}
+        image={pokemon_data?.image}
+      />
+
+      <Stats stats={pokemon_data?.stats} />
+    </div>
+  </div>
+</Layout>
