@@ -1,45 +1,92 @@
 ---
+import BackgroundId from '../components/PokemonPage/BackgroundId.astro'
+import Header from '../components/PokemonPage/Header.astro'
 import Info from '../components/PokemonPage/Info.astro'
+import NextPokemonButton from '../components/PokemonPage/NextPokemonButton.astro'
 import Stats from '../components/PokemonPage/Stats.astro'
-import Search from '../components/SearchPage/Search.astro'
 import Layout from '../layouts/Layout.astro'
-import formatId from '../lib/formatId'
 import getBGColor from '../lib/getBGColor'
 import { getPokemon } from '../services/getPokemon'
 
 const { pokemon } = Astro.params
 
 const { pokemon_data, status } = await getPokemon(pokemon)
-/* const pokecolor = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`).then((res) => res.json()) */
 
 if (status === 404) {
   return Astro.redirect('/404')
 }
 
 const bgcolor = getBGColor(pokemon_data?.type)
-const id = formatId(pokemon_data?.id)
 ---
 
-<Layout title={pokemon as string}>
+<Layout title={pokemon_data?.name as string}>
   <div
+    id='wrapper'
     style={`background-color: ${bgcolor}`}
-    class={`min-w-screen min-h-screen flex justify-center bg-${bgcolor}] text-white`}>
+    class={`min-w-screen min-h-screen flex justify-center text-white`}>
+
     <div class='max-w-[1200px] relative w-full py-2'>
-      <div class='w-full h-12'><Search /></div>
-
-      <div class='left-1/2 right-1/2 top-[20%] absolute flex items-center justify-center text-[25vmin] font-extrabold opacity-20'>
-        {id}
-      </div>
-
+      <Header />
+      <BackgroundId id={pokemon_data?.id} />
       <Info
         name={pokemon_data?.name}
         height={pokemon_data?.height}
         weight={pokemon_data?.weight}
         abilities={pokemon_data?.abilities}
         image={pokemon_data?.image}
+        type={pokemon_data?.type}
       />
-
       <Stats stats={pokemon_data?.stats} />
     </div>
+    <NextPokemonButton />
   </div>
+
 </Layout>
+
+<script is:inline>
+  {
+    let theme
+    let currBg = document.querySelector('#wrapper').style.backgroundColor
+    let id = document.getElementById('id-container').getAttribute('aria-label')
+    const mainNode = document.body
+
+    function callback(mutationsList, observer) {
+      mutationsList.forEach((mutation) => {
+        theme = mutation.target.classList[0]
+
+        if (theme === 'dark') {
+          document.querySelector('#wrapper').style.backgroundColor = '#414141'
+        } else {
+          document.querySelector('#wrapper').style.backgroundColor = currBg
+        }
+      })
+    }
+
+    const mutationObserver = new MutationObserver(callback)
+    mutationObserver.observe(mainNode, { attributes: true })
+
+    function addImageToLocalstorage() {
+      let pathname = window.location.pathname
+      let pokemonName = pathname.slice(1, pathname.length)
+      let pokemonArr = localStorage.getItem('pokemonArr')
+
+      pokemonArr = pokemonArr ? JSON.parse(pokemonArr) : []
+
+      let newArr = pokemonArr.map((pok) =>
+        pok.name === pokemonName
+          ? {
+              ...pok,
+              image:
+                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' +
+                id +
+                '.png',
+            }
+          : pok
+      )
+
+      localStorage.setItem('pokemonArr', JSON.stringify(newArr))
+    }
+
+    addImageToLocalstorage()
+  }
+</script>

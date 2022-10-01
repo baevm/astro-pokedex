@@ -1,4 +1,7 @@
 ---
+import capitalizeLetter from '../../lib/capitalizeLetter'
+
+
 export interface Props {
   stats: [
     {
@@ -24,7 +27,7 @@ const { stats } = Astro.props
         return (
           <div class='mb-2 flex justify-between'>
             <div class='flex w-full'>
-              <b class='min-w-[150px]'>{stat.stat.name}</b>
+              <b class='min-w-[150px]'>{capitalizeLetter(stat.stat.name)}</b>
               <div style={`width: ${percent}%; max-width: 75%`} class={`rounded-lg bg-white`} />
             </div>
             <span class='text-end ml-2'>{stat.base_stat}</span>

@@ -1,6 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import { Image } from '@astrojs/image/components'
+import Layout from '../layouts/Layout.astro';
 
 const pokemons = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0').then((res) => res.json())
 

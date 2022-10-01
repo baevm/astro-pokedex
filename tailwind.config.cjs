@@ -14,6 +14,7 @@ module.exports = {
         'second-bg-color': 'var(--second-bg-color)',
         'border-color': 'var(--border-color)',
         'active-border-color': 'var(--active-border-color)',
+        'recent-search-color': 'var(--recent-search-color)',
       },
     },
   },

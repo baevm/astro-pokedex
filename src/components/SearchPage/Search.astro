@@ -1,25 +1,23 @@
 ---
-import {Image} from "@astrojs/image/components";
-import { BiSearch } from "react-icons/bi";
-import pokeballImage from './src/images/pokeball.png'
+import { BiSearch } from 'react-icons/bi/index.js'
 ---
 
 <form class='relative block w-full h-full' method='post' onsubmit='return redirectPokemon()'>
   <BiSearch
-    size={'24'}
-    className='pointer-events-none absolute top-1/2 left-2 -translate-y-1/2 transform text-primary-text-color'
+    size={24}
+    className='w-6  pointer-events-none absolute top-1/2 left-2 -translate-y-1/2 transform text-primary-text-color'
   />
   <input
     class='w-full rounded-3xl border-2 border-border-color bg-second-bg-color h-full px-10 text-second-text-color placeholder:text-second-text-color focus:border-active-border-color focus:outline-none selection:focus:outline-none'
     placeholder='Find a pokemon...'
   />
   <button type='submit'>
-    <Image
+    <img
       class='absolute top-1/2 right-3 -translate-y-1/2 transform cursor-pointer'
       alt='pokeball'
       width='30'
       height='30'
-      src={pokeballImage}
+      src={'/pokeball.png'}
     />
   </button>
 </form>
@@ -29,7 +27,10 @@ import pokeballImage from './src/images/pokeball.png'
     function redirectPokemon() {
       const input = document.querySelector('input')
       const pokemon = input.value.toLowerCase()
-      console.log(pokemon)
+      let pokemonArr = localStorage.getItem('pokemonArr')
+      pokemonArr = pokemonArr ? JSON.parse(pokemonArr) : []
+      pokemonArr.unshift({ id: Date.now(), name: pokemon, image: '' })
+      localStorage.setItem('pokemonArr', JSON.stringify(pokemonArr))
       window.location.href = `/${pokemon}`
       return false
     }

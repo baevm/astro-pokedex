@@ -1,5 +1,10 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<div>Pokemon not found</div>
+<Layout title={'404 | Not found'}>
+  <div class='min-w-screen min-h-screen flex flex-col items-center justify-center bg-bg-color text-recent-search-color'>
+    <img class='mb-12' src={'/pokemon_logo.png'} width='320' height='118' alt='pokemon logo'  />
+    <h1 class="text-lg">404 | Pokemon not found</h1>
+  </div>
+</Layout>

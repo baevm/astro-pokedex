@@ -1,0 +1,15 @@
+---
+import formatId from "../../lib/formatId";
+
+
+const { id } = Astro.props
+
+const formattedId = formatId(id)
+---
+
+<div
+  id='id-container'
+  aria-label={id}
+  class='left-1/2 right-1/2 top-[20%] absolute flex items-center justify-center text-[25vmin] font-extrabold opacity-20'>
+  {formattedId}
+</div>

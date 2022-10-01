@@ -1,0 +1,22 @@
+---
+import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md/index.js'
+
+---
+
+<div class='z-50 absolute w-screen pr-4 pl-4 top-1/2 flex justify-between items-center'>
+  <button class="cursor-pointer" onclick='return lastPokemon()'><MdNavigateBefore size={42} className={'text-white'} /></button>
+  <button class="cursor-pointer" onclick='return nextPokemon()'><MdNavigateNext size={42} className={'text-white'} /></button>
+</div>
+
+<script is:inline>
+  let pokemonId = document.getElementById('id-container').getAttribute('aria-label')
+
+
+  function lastPokemon() {
+    window.location.href = `/${Number(pokemonId) - 1}`
+  }
+
+  function nextPokemon() {
+    window.location.href = `/${Number(pokemonId) + 1}`
+  }
+</script>
